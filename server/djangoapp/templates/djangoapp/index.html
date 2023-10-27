@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
     <title>Dealership Review</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -14,10 +15,22 @@
 </head>
 
     <body>
-    <!-- Remove this line the first time you edit this file -->
-     This is the index page of your Django app!
     <!--Add a nav bar here -->
-
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <h2 class="navbar-brand" href="#">Car Dealership</h2>
+                </div>
+                <ul class="nav navbar-nav navbar-light">
+                    <li>
+                        <a class="btn btn-link" href="">Home</a>
+                        <a class="btn btn-link" href="">Add review</a>
+                        <a class="btn btn-link" href="{% url 'djangoapp:about' %}">About</a>
+                        <a class="btn btn-link" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     <!--Add a dealer table here -->
 
     </body>
