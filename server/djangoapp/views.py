@@ -32,6 +32,7 @@ def login_request(request):
         password = request.POST['psw']
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            print("Log in the user `{}`".format(username))
             login(request,user)
             return redirect('djangoapp:index')
         else:
