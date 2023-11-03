@@ -24,13 +24,13 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
-                    <li>
+                    <div class="rightalign">
                          <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
-                         <a class="btn btn-link" href="">Logout</a>
-                    </li>
+                         <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                    </div>
                     {% else %}
                     <li>
-                         <form class="form-inline" action="" method="post">
+                         <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
                             {% csrf_token %}
                             <div class="input-group">
                                  <input type="text" class="form-control" placeholder="Username" name="username" >
@@ -41,10 +41,17 @@
                          </form>
                     </li>
                     {% endif %}
+                    {% if message %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
     <!--Add a dealer table here -->
+
+
     <footer class="footer">
         <div class="container-fluid">
 
