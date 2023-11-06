@@ -77,7 +77,7 @@ def registration_request(request):
 def get_dealerships(request):
     context = {}
     if request.method == "GET":
-        return render(request, 'djangoapp/index.html', context)
+        return redirect('http://localhost:3000/dealerships/get')
 
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
