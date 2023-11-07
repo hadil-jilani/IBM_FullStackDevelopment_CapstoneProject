@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
 # from .restapis import related methods
-from .restapis import get_dealers_from_cf
+from .restapis import get_dealers_from_cf, get_dealer_by_id
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -77,9 +77,17 @@ def registration_request(request):
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
     if request.method == "GET":
+        id = request.GET.get('dealerId')
+        print(type(id))
+        # id = request.params
         url = "http://localhost:3000/dealerships/get"
-        # Get dealers from the URL
-        dealerships = get_dealers_from_cf(url)
+        if (id):
+            dealerId = int(id)
+            # Get specific dealership details by id
+            dealerships = get_dealer_by_id(url, dealerId=dealerId) 
+        else:
+            # Get dealers from the URL
+            dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
         dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
         # Return a list of dealer short name
