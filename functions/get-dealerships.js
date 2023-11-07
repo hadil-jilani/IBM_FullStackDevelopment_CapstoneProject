@@ -66,72 +66,7 @@ app.get('/dealerships/get', (req, res) => {
         }
     });
 })
-// app.get('/reviews/get', (req, res) => {
-//     const dealerId = req.query;
 
-//     // Create a selector object based on query parameters
-//     const selector = {};
-//     if (dealerId) {
-//         selector.id = parseInt(dealerId);
-//     }
-    
-//     const queryOptions = {
-//         selector,
-//         limit: 25, // Limit the number of documents returned to 10
-//     };
-//     // db_reviews.find();
-//     db_reviews.find(queryOptions, (err, body) => {
-//         if (err) {
-//             console.error('Error fetching reviews:', err);
-//             res.status(500).json({ error: 'An error occurred while fetching reviews.' });
-//         } else {
-//             const reviews = body.docs;
-//             res.json(reviews);
-//         }
-//     });
-// });
-app.get('/reviews/get', async (req, res) => {
-    const dealershipId = req.query.dealershipId;
-  
-    // Create a selector object based on query parameters
-    const selector = {};
-    if (dealershipId) {
-      selector.dealership = parseInt(dealershipId);
-    }
-  
-    const queryOptions = {
-      selector,
-      limit: 25, // Limit the number of documents returned to 10
-    };
-  
-    const body = await db_reviews.find(queryOptions);
-  
-    if (body.length === 0) {
-      res.status(404).json({ error: 'No reviews found for dealership with ID ' + dealershipId });
-    } else {
-      const reviews = body.docs;
-      res.json(reviews);
-    }
-  });
-
-  app.post('/reviews', async (req, res) => {
-    const review = req.body;
-  
-    // Validate the review
-    if (!review.dealership || !review.car_make || !review.review) {
-      res.status(400).json({ error: 'Invalid review' });
-      return;
-    }
-  
-    // Save the review to the database
-    try {
-      await db_reviews.insert(review);
-      res.status(201).json({ message: 'Review created successfully' });
-    } catch (err) {
-      console.error('Error saving review:', err);
-      res.status(500).json({ error: 'An error occurred while saving the review' });
-    }
-  });
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
