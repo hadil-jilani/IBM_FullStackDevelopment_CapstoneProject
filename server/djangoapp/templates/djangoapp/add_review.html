@@ -12,5 +12,31 @@
 </head>
     <body>
     <!--Add review form here -->
+    <div class="container">
+            <h2>Add a review about <b>{{dealer.full_name}}</b></h2>
+            <form method='post' action="{% url 'add_review' dealer_id%}" >
+                {% csrf_token %}
+                <label for="content"><b>Enter the review content:</b></label>
+                <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
+                <label for="purchasecheck" >Has purchased the car from {{dealer.name}} ? (select purchased car information below if checked)</label>
+                <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
+                <label for="car"><b>Select your car (model-make-year):</b></label>
+                <select name="car" id="car" class="form-select" required>
+                {% for car in cars %}
+                    <option selected value={{car.id}}>{{car.name}}-{{car.make.name}}-{{ car.year|date:"Y" }}</option>
+                {% endfor %}
+               </select>
+               <label for="purchasedate"><b>Select Your Purchase Date:</b></label>
+               <input class="date-own form-control" type="text" name="purchasedate" id="purchasedate">
+              </form>
+              <button type="submit" class="btn-primary">Submit</button>
+              
+        </div>
     </body>
+    <script type="text/javascript">
+        $('.date-own').datepicker({
+           format: 'mm/dd/yyyy'
+         });
+   </script>
+    
 </html>
