@@ -46,7 +46,7 @@
     </nav>
     <!-- Add reviews as cards -->
     <div class="card-columns">
-        {% for review in review_list%}
+        {% for review in reviews%}
         <div class="card">
             {% if review.sentiment == "positive" %}
                 <img class="card-img-left" src="{{MEDIA_URL}}/emoji/positive.png" width="36px" height="36px"
